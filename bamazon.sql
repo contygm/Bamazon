@@ -41,4 +41,4 @@ VALUES ('Fountain Pen','Office Supplies', 2.27, 35);
 -- INSERT INTO Products(productName, departmentName, price, stockQuantity) 
 -- VALUES ('Flea Shampoo','Pet Supplies', 8.28, 7);
 
-SELECT * FROM Produts;
+SELECT * FROM Products;
