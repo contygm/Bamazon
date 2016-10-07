@@ -27,11 +27,13 @@ function displayStock(){
 	});
 };
 
-// using prompt npm, promt two messages
-// ask for ID
-// ask for how many they want
+// check for sufficent inventory
+	// fill order (stockQuantity--)
+	// show total cost of purchase
+// else "Insifficient quantity"
 
-function VAR## (){
+
+function buyItem(){
     inquirer.prompt([{
            name: "ID",
            message: "What's the product id for your item?"
@@ -39,19 +41,30 @@ function VAR## (){
            name: "quantity",
            message: "How many would you like?"
        }]).then(function(answers){
+	       		connection.query('SELECT * FROM Products WHERE id=?', [answers.id], function(err, res){
+	       			console.log(res);
+	       			if(answers.quantity < res.stockQuantity){
+	       				
+	       				// sQ --
 
-		       	connection.query('SELECT * FROM Top5000 WHERE artist=?', [answers.artist], function(err, res) {
-				    for (var i = 0; i < res.length; i++) {
-				        console.log(res[i])
-				        // console.log(res[i].position + " | " + res[i].artist + " | " + res[i].song + " | " + res[i].release + " | " + res[i].1rating + " | " + res[i].2rating + " | " + res[i].3rating + " | " + res[i].4rating + " | " + res[i].5rating);
-				    }
-				})
+	       				// total of purchase
+
+	       			} else {
+	       				console.log("Sorry, we don't have enough of" + res.productName + "fill that order!")
+	       				inquirer.prompt([{
+				           name: "again",
+				           message: "What's the product id for your item?",
+				           type: 'confirm'
+				       }]).then (function(answers) {
+				       		if (answers.again){
+				       			buyItem()
+	       					}
+	       				})
+	       			}
+		       	}
 	  		})
+       			
 }
 
 
-// check for sufficent inventory
-	// fill order (stockQuantity--)
-	// show total cost of purchase
-// else "Insifficient quantity"
 
