@@ -13,8 +13,6 @@ connection.connect(function(err) {
     if (err) throw err;
     console.log("connected as id " + connection.threadId);
     displayStock();
-
-
 })
 
 function displayStock(){
@@ -24,14 +22,10 @@ function displayStock(){
 	    }
 
     	console.log("-----------------------------------");
+    	buyItem();
 	});
+
 };
-
-// check for sufficent inventory
-	// fill order (stockQuantity--)
-	// show total cost of purchase
-// else "Insifficient quantity"
-
 
 function buyItem(){
     inquirer.prompt([{
@@ -41,13 +35,15 @@ function buyItem(){
            name: "quantity",
            message: "How many would you like?"
        }]).then(function(answers){
-	       		connection.query('SELECT * FROM Products WHERE id=?', [answers.id], function(err, res){
+	       		connection.query('SELECT * FROM Products WHERE id=?', [answers.ID], function(err, res){
 	       			console.log(res);
 	       			if(answers.quantity < res.stockQuantity){
 	       				
-	       				// sQ --
+	       				res.stockQuantity -= answers.quantity;
 
-	       				// total of purchase
+	       				var total = res.stockQuantity * res.price;
+
+	       				console.log(total);
 
 	       			} else {
 	       				console.log("Sorry, we don't have enough of" + res.productName + "fill that order!")
@@ -58,12 +54,14 @@ function buyItem(){
 				       }]).then (function(answers) {
 				       		if (answers.again){
 				       			buyItem()
+	       					} else {
+	       						console.log("Have a great day.");
 	       					}
 	       				})
 	       			}
-		       	}
-	  		})
+	  			})
        			
+			})
 }
 
 
