@@ -36,26 +36,28 @@ function buyItem(){
            message: "How many would you like?"
        }]).then(function(answers){
 	       		connection.query('SELECT * FROM Products WHERE id=?', [answers.ID], function(err, res){
-	       			console.log(res);
-	       			if(answers.quantity < res.stockQuantity){
+	   
+	       			if(answers.quantity < res[0].stockQuantity){
 	       				
-	       				res.stockQuantity -= answers.quantity;
+	       				res[0].stockQuantity -= answers.quantity;
 
-	       				var total = res.stockQuantity * res.price;
+	       				var total = answers.quantity * res[0].price;
 
-	       				console.log(total);
+	       				console.log("That'll be: " + total);
+	       				process.exit();
 
 	       			} else {
 	       				console.log("Sorry, we don't have enough of" + res.productName + "fill that order!")
 	       				inquirer.prompt([{
 				           name: "again",
-				           message: "What's the product id for your item?",
+				           message: "Would you like to pick a different item?",
 				           type: 'confirm'
 				       }]).then (function(answers) {
 				       		if (answers.again){
 				       			buyItem()
 	       					} else {
 	       						console.log("Have a great day.");
+	       						process.exit();
 	       					}
 	       				})
 	       			}
