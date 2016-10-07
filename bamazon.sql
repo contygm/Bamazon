@@ -11,8 +11,8 @@ CREATE TABLE Products(
 	primary key(id)
 );
 
-INSERT INTO Products(productName, departmentName, price, stockQuantity) 
-VALUES ('Fountain Pen','Office Supplies', 2.27, 35);
+-- INSERT INTO Products(productName, departmentName, price, stockQuantity) 
+-- VALUES ('Fountain Pen','Office Supplies', 2.27, 35);
 -- 
 -- INSERT INTO Products(productName, departmentName, price, stockQuantity) 
 -- VALUES ('Highlighters 4-Pack','Office Supplies', 5.25, 50);
