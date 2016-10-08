@@ -30,7 +30,7 @@ function pickProcess(){
 	inquirer.prompt([{
            name: "chosenProcess",
            type: "list",
-           message: "What's the product id for your item?",
+           message: "What do you need to do?",
            choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product"]
        }]).then(function(answers)){
 			switch(answers.chosenProcess){
@@ -68,7 +68,7 @@ function displayStock(){
 };
 
 function lowStock(){
-	connection.query('SELECT * FROM Products WHERE stockQuantity', function(err, res) {
+	connection.query('SELECT * FROM Products WHERE stockQuantity <= 5', function(err, res) {
 		    for (var i = 0; i < res.length; i++) {
 		        console.log(res[i].id + " | " + res[i].productName + " | " + res[i].price + " | " + res[i].quantities);
 		    }
@@ -79,11 +79,44 @@ function lowStock(){
 
 // adds to stockQuantity
 function addStock(){
-
+	inquirer.prompt([{
+           name: "id",
+           message: "What's the product id?"
+       }, {
+           name: "quantity",
+           message: "How many would you like to add?"
+       }]).then(function(answers){
+       		var query = "INSERT INTO Products(productName, departmentName, price, stockQuantity)"; 
+       		
+       		connection.query(query, function(err, res) {
+	   			
+   			});	
+       });
 }
 
 // adds whole new item
 function newProduct{
+	
+	inquirer.prompt([{
+       name: "productName",
+       message: "What's the product's name?"
+   }, {
+       name: "departmentName",
+       message: "What department is the product in?"
+   }, {
+       name: "price",
+       message: "What's the product's per item price?"
+   }, {
+       name: "stockQuantity",
+       message: "How many would you to add?"
+   }]).then(function(answers){   		
+   		var query = "INSERT INTO Products(productName, departmentName, price, stockQuantity)"; 
+		query += "VALUES (?,?,?,?)";
 
+   		connection.query(query, function(err, res) {
+   			
+   		});	
+   });
+	
 }
 
