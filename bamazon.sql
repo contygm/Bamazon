@@ -41,4 +41,6 @@ CREATE TABLE Products(
 -- INSERT INTO Products(productName, departmentName, price, stockQuantity) 
 -- VALUES ('Flea Shampoo','Pet Supplies', 8.28, 7);
 
+UPDATE Products SET stockQuantity = 45 WHERE id = 2 ;
+
 SELECT * FROM Products;

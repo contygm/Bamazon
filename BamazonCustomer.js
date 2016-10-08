@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
     if (err) throw err;
-    console.log("connected as id " + connection.threadId);
+
     displayStock();
 })
 
@@ -39,11 +39,15 @@ function buyItem(){
 	   
 	       			if(answers.quantity < res[0].stockQuantity){
 	       				
-	       				res[0].stockQuantity -= answers.quantity;
+	       				
+	       				var updatedQuantity = res[0].stockQuantity - answers.quantity;
+	       				console.log(updatedQuantity);
+
+	       				connection.query('UPDATE Products SET stockQuantity=? WHERE id=?', [updatedQuantity, answers.ID]);
 
 	       				var total = answers.quantity * res[0].price;
 
-	       				console.log("That'll be: " + total);
+	       				console.log("That'll be: $" + total);
 	       				process.exit();
 
 	       			} else {
