@@ -86,11 +86,9 @@ function addStock(){
            name: "quantity",
            message: "How many would you like to add?"
        }]).then(function(answers){
-       		var query = "INSERT INTO Products(productName, departmentName, price, stockQuantity)"; 
-       		
-       		connection.query(query, function(err, res) {
-	   			
-   			});	
+       		var query = 'UPDATE Products SET stockQuantity=? WHERE id=?'; 
+       		//, function(err, res) {}
+       		connection.query(query, [answers.quantity, answers.id]);	
        });
 }
 
@@ -112,10 +110,8 @@ function newProduct{
    }]).then(function(answers){   		
    		var query = "INSERT INTO Products(productName, departmentName, price, stockQuantity)"; 
 		query += "VALUES (?,?,?,?)";
-
-   		connection.query(query, function(err, res) {
-   			
-   		});	
+		//, function(err, res) {}
+   		connection.query(query,[answers.productName, answers.departmentName, answers.price, answers.stockQuantity]);	
    });
 	
 }
