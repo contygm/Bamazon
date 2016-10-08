@@ -51,8 +51,6 @@ function buyItem(){
 							var query1 = 'UPDATE Departments SET totalSales = totalSales + ? WHERE id = ?';
 
 							connection.query(query1, [total, result[0].id], function(err, result) {});
-							console.log(result[0].id);
-							console.log(total);
 						});
 
 	       				goAgain();
@@ -69,7 +67,7 @@ function buyItem(){
 function goAgain(){
 	inquirer.prompt([{
        name: "again",
-       message: "Would you like to pick a another item or try different quantity?",
+       message: "Would you like to pick a another item (or try a different quantity)?",
        type: 'confirm'
    }]).then (function(answers) {
    		if (answers.again){
