@@ -19,12 +19,15 @@ CREATE TABLE Departments(
 	id INTEGER(11) AUTO_INCREMENT NOT NULL,
     departmentName VARCHAR(50) NULL,
 	overHeadCosts DECIMAL(10,2) NULL,
-	totalSales DECIMAL(10,2) NOT NULL,
+	totalSales DECIMAL(10,2) NULL,
 	primary key(id)
 );
 
 
 USE Bamazon;
+
+UPDATE Departments SET totalSales = 2 WHERE id=5;
+UPDATE Departments SET totalSales = 2 WHERE id=6;
 
 SELECT * FROM Departments;
 SELECT * FROM Products;

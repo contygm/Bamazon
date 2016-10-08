@@ -36,26 +36,48 @@ function runInterface(){
 function displaySales(){
 	var table = new Table({ head: ["ID", "Department Name", "Over Head Costs", "Product Sales", "Total Profit"] });
 	connection.query('SELECT * FROM Departments', function(err, res) {
-	    console.log(res[0].id);
-
-	    for (var i = 0; i < 5; i++) {
+	    for (var i = 0; i < res.length; i++) {
+		    var profit = res[i].overHeadCosts - res[i].totalSales;
 		    table.push(
-			    { '#': ['Name', 'overHeadCosts','Sales', 'Profit'] }
+			    [res[i].id, res[i].departmentName, res[i].overHeadCosts,res[i].totalSales, profit]
 			);
 		}
 		console.log(table.toString());
+		goAgain();
 	});
-
-	
-	
 
 }
 
-
 function addDepartments(){
-	console.log("Yo not ready yet!");
-	// insert into Departments(departmentName, overHeadCosts)
-	// values('Food', 3800);
+	
+	inquirer.prompt([{
+	           name: "name",
+	           message: "What's the new department's name?"
+	       },{
+	           name: "cost",
+	           message: "What's the overhead cost?"
+	       }]).then(function(answers){
+	       		var query = "INSERT INTO Departments(departmentName, overHeadCosts, totalSales)";
+				query += "VALUES(?,?,0)";
+	       		connection.query(query, [answers.name, answers.cost], function(err,res){});
+	       		goAgain();
+	       });
+	
+}
+
+function goAgain(){
+	inquirer.prompt([{
+       name: "again",
+       message: "Would you like to do something else?",
+       type: 'confirm'
+   }]).then (function(answers) {
+   		if (answers.again){
+   			runInterface();
+			} else {
+				console.log("Have a great day.");
+				process.exit();
+			}
+		})
 }
 
 runInterface();
