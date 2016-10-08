@@ -9,11 +9,6 @@ var connection = mysql.createConnection({
 	password: '',
 	database: 'Bamazon'
 });
-	
-// Create New Department
-	// insert into Departments(departmentName, overHeadCosts)
-	// values('Food', 3800);
-	
 
 function runInterface(){
 	inquirer.prompt([{
@@ -39,20 +34,28 @@ function runInterface(){
 
 
 function displaySales(){
-	var table = new Table({ head: ["Department ID", "Department Name", "Over Head Costs", "Product Sales", "Total Profit"] });
- 
-	table.push(
-	    { 'id#': ['Name', 'overHeadCosts','Sales', 'Profit'] }
-	  , { 'id#': ['Name', 'overHeadCosts','Sales', 'Profit'] }
-	);
-	 
-	console.log(table.toString());
+	var table = new Table({ head: ["ID", "Department Name", "Over Head Costs", "Product Sales", "Total Profit"] });
+	connection.query('SELECT * FROM Departments', function(err, res) {
+	    console.log(res[0].id);
+
+	    for (var i = 0; i < 5; i++) {
+		    table.push(
+			    { '#': ['Name', 'overHeadCosts','Sales', 'Profit'] }
+			);
+		}
+		console.log(table.toString());
+	});
+
+	
+	
 
 }
 
 
 function addDepartments(){
-	console.log("Yo not ready yet!")
+	console.log("Yo not ready yet!");
+	// insert into Departments(departmentName, overHeadCosts)
+	// values('Food', 3800);
 }
 
 runInterface();
