@@ -32,7 +32,7 @@ function pickProcess(){
            type: "list",
            message: "What do you need to do?",
            choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product"]
-       }]).then(function(answers)){
+       }]).then(function(answers){
 			switch(answers.chosenProcess){
 				case 'View Products for Sale':
 					displayStock();
@@ -53,7 +53,7 @@ function pickProcess(){
 				default:
 					console.log("Good job holmes, you broke it!");
 			}
-	};
+		});
 }
 
 function displayStock(){
@@ -63,6 +63,7 @@ function displayStock(){
 	    }
 
     	console.log("-----------------------------------");
+    	goAgain();
 	});
 
 };
@@ -74,6 +75,7 @@ function lowStock(){
 		    }
 
 	    	console.log("-----------------------------------");
+	    	goAgain();
 	});
 }
 
@@ -86,14 +88,15 @@ function addStock(){
            name: "quantity",
            message: "How many would you like to add?"
        }]).then(function(answers){
-       		var query = 'UPDATE Products SET stockQuantity=? WHERE id=?'; 
-       		//, function(err, res) {}
-       		connection.query(query, [answers.quantity, answers.id]);	
+       		var query = 'UPDATE Products SET stockQuantity=? WHERE id=?';
+       		connection.query(query, [answers.quantity, answers.id],function(err, res) { 
+       				goAgain()
+       		});	
        });
 }
 
 // adds whole new item
-function newProduct{
+function newProduct(){
 	
 	inquirer.prompt([{
        name: "productName",
@@ -110,9 +113,28 @@ function newProduct{
    }]).then(function(answers){   		
    		var query = "INSERT INTO Products(productName, departmentName, price, stockQuantity)"; 
 		query += "VALUES (?,?,?,?)";
-		//, function(err, res) {}
-   		connection.query(query,[answers.productName, answers.departmentName, answers.price, answers.stockQuantity]);	
+		
+   		connection.query(query,[answers.productName, answers.departmentName, answers.price, answers.stockQuantity], function(err, res) { 
+   			goAgain()
+   		});	
    });
 	
 }
+
+function goAgain(){
+	inquirer.prompt([{
+       name: "again",
+       message: "Would you like to do something else?",
+       type: 'confirm'
+   }]).then (function(answers) {
+   		if (answers.again){
+   			pickProcess();
+			} else {
+				console.log("Have a great day.");
+				process.exit();
+			}
+		})
+}
+
+pickProcess();
 
