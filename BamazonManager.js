@@ -122,6 +122,7 @@ function newProduct(){
 		query += "VALUES (?,?,?,?)";
 		
    		connection.query(query,[answers.productName, answers.departmentName, answers.price, answers.stockQuantity], function(err, res) { 
+
    			goAgain()
    		});	
    });

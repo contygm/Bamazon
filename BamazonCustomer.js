@@ -39,15 +39,12 @@ function buyItem(){
 	   
 	       			if(answers.quantity < res[0].stockQuantity){
 	       					       				
-	       				var updatedQuantity = res[0].stockQuantity - answers.quantity;
-	       				console.log(updatedQuantity);
-
+	       				var updatedQuantity = res[0].stockQuantity - answers.quantity;	       		
 	       				connection.query('UPDATE Products SET stockQuantity=? WHERE id=?', [updatedQuantity, answers.ID], function(err, result) {});
-
 	       				var total = answers.quantity * res[0].price;
-
 	       				console.log("That'll be: $" + total);
 
+	       				
 	       				goAgain();
 
 	       			} else {
@@ -72,5 +69,12 @@ function goAgain(){
 				process.exit();
 			}
 		})
+}
+
+function addSales(numSold){
+	var selQuery = 'SELECT * FROM Departments WHERE id=?'
+	var updateQuery = 'UPDATE Departments SET stockQuantity=? WHERE id=?';
+	connection.query(####, [updatedQuantity, answers.ID], function(err, result) {});
+	       				
 }
 
