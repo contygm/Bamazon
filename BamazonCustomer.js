@@ -43,12 +43,11 @@ function buyItem(){
 	       				var updatedQuantity = res[0].stockQuantity - answers.quantity;
 	       				console.log(updatedQuantity);
 
-	       				connection.query('UPDATE Products SET stockQuantity=? WHERE id=?', [updatedQuantity, answers.ID]);
+	       				connection.query('UPDATE Products SET stockQuantity=? WHERE id=?', [updatedQuantity, answers.ID], function(err, result) {});
 
 	       				var total = answers.quantity * res[0].price;
 
 	       				console.log("That'll be: $" + total);
-	       				process.exit();
 
 	       			} else {
 	       				console.log("Sorry, we don't have enough of" + res.productName + "fill that order!")
