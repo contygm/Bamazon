@@ -19,9 +19,9 @@ CREATE TABLE Departments(
 	id INTEGER(11) AUTO_INCREMENT NOT NULL,
     departmentName VARCHAR(50) NULL,
 	overHeadCosts DECIMAL(10,2) NULL,
-	totalSales INTEGER(11) NULL,
+	totalSales DECIMAL(10,2) NULL,
 	primary key(id)
 );
 
-
 SELECT * FROM Departments;
+SELECT * FROM Products;
