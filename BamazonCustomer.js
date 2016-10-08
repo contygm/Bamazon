@@ -49,25 +49,29 @@ function buyItem(){
 
 	       				console.log("That'll be: $" + total);
 
+	       				goAgain();
+
 	       			} else {
 	       				console.log("Sorry, we don't have enough of" + res.productName + "fill that order!")
-	       				inquirer.prompt([{
-				           name: "again",
-				           message: "Would you like to pick a different item?",
-				           type: 'confirm'
-				       }]).then (function(answers) {
-				       		if (answers.again){
-				       			buyItem()
-	       					} else {
-	       						console.log("Have a great day.");
-	       						process.exit();
-	       					}
-	       				})
+	       				goAgain();
 	       			}
 	  			})
        			
 			})
 }
 
-
+function goAgain(){
+	inquirer.prompt([{
+       name: "again",
+       message: "Would you like to pick a different item?",
+       type: 'confirm'
+   }]).then (function(answers) {
+   		if (answers.again){
+   			buyItem()
+			} else {
+				console.log("Have a great day.");
+				process.exit();
+			}
+		})
+}
 
