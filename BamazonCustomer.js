@@ -38,8 +38,7 @@ function buyItem(){
 	       		connection.query('SELECT * FROM Products WHERE id=?', [answers.ID], function(err, res){
 	   
 	       			if(answers.quantity < res[0].stockQuantity){
-	       				
-	       				
+	       					       				
 	       				var updatedQuantity = res[0].stockQuantity - answers.quantity;
 	       				console.log(updatedQuantity);
 
@@ -63,7 +62,7 @@ function buyItem(){
 function goAgain(){
 	inquirer.prompt([{
        name: "again",
-       message: "Would you like to pick a different item?",
+       message: "Would you like to pick a another item or try different quantity?",
        type: 'confirm'
    }]).then (function(answers) {
    		if (answers.again){

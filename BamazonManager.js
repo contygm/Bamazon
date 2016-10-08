@@ -58,8 +58,10 @@ function pickProcess(){
 
 function displayStock(){
 	connection.query('SELECT * FROM Products', function(err, res) {
+	    console.log("ID | Produce Name | Price | Stock Quantity");
+	    console.log("-----------------------------------");
 	    for (var i = 0; i < res.length; i++) {
-	        console.log(res[i].id + " | " + res[i].productName + " | " + res[i].price + " | " + res[i].quantities);
+	        console.log(res[i].id + " | " + res[i].productName + " | " + res[i].price + " | " + res[i].stockQuantity);
 	    }
 
     	console.log("-----------------------------------");
@@ -69,9 +71,13 @@ function displayStock(){
 };
 
 function lowStock(){
-	connection.query('SELECT * FROM Products WHERE stockQuantity <= 5', function(err, res) {
+	connection.query('SELECT * FROM Products WHERE stockQuantity < 5', function(err, res) {
+		    
+			console.log("ID | Produce Name | Price | Stock Quantity");
+	    	console.log("-----------------------------------");
+		    
 		    for (var i = 0; i < res.length; i++) {
-		        console.log(res[i].id + " | " + res[i].productName + " | " + res[i].price + " | " + res[i].quantities);
+		        console.log(res[i].id + " | " + res[i].productName + " | " + res[i].price + " | " + res[i].stockQuantity);
 		    }
 
 	    	console.log("-----------------------------------");
@@ -88,7 +94,8 @@ function addStock(){
            name: "quantity",
            message: "How many would you like to add?"
        }]).then(function(answers){
-       		var query = 'UPDATE Products SET stockQuantity=? WHERE id=?';
+       		var query = 'UPDATE Products SET stockQuantity = stockQuantity + ? WHERE id=?';
+       		var newQuantity = 
        		connection.query(query, [answers.quantity, answers.id],function(err, res) { 
        				goAgain()
        		});	
@@ -109,7 +116,7 @@ function newProduct(){
        message: "What's the product's per item price?"
    }, {
        name: "stockQuantity",
-       message: "How many would you to add?"
+       message: "How many would you like to add?"
    }]).then(function(answers){   		
    		var query = "INSERT INTO Products(productName, departmentName, price, stockQuantity)"; 
 		query += "VALUES (?,?,?,?)";
