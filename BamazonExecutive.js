@@ -9,27 +9,10 @@ var connection = mysql.createConnection({
 	password: '',
 	database: 'Bamazon'
 });
-
-// var table = new Table({ head: ["Department ID", "Department Name", "Over Head Costs", "Product Sales", "Total Profit"] });
- 
-// table.push(
-//     { 'id#': ['Name', 'overHeadCosts','Sales', 'Profit'] }
-//   , { 'id#': ['Name', 'overHeadCosts','Sales', 'Profit'] }
-// );
- 
-// console.log(table.toString());
-
-
-// Running this application will list a set of menu options:
-	// View Product Sales by Department
-		//display a summarized table in their terminal
-		// TotalProfit calculated on the fly 
-			//= OverheadCosts - ProductSales. 
-			//should not be stored in any database. 
-			//use a custom alias.
-	// Create New Department
-		// insert into Departments(departmentName, overHeadCosts)
-		// values('Food', 3800);
+	
+// Create New Department
+	// insert into Departments(departmentName, overHeadCosts)
+	// values('Food', 3800);
 	
 
 function runInterface(){
@@ -45,7 +28,7 @@ function runInterface(){
 					break;
 
 				case 'Create New Department':
-					addDepartment();
+					addDepartments();
 					break;
 
 				default:
@@ -54,13 +37,28 @@ function runInterface(){
        })
 }
 
+
 function displaySales(){
+	var table = new Table({ head: ["Department ID", "Department Name", "Over Head Costs", "Product Sales", "Total Profit"] });
+ 
+	table.push(
+	    { 'id#': ['Name', 'overHeadCosts','Sales', 'Profit'] }
+	  , { 'id#': ['Name', 'overHeadCosts','Sales', 'Profit'] }
+	);
+	 
+	console.log(table.toString());
 
 }
+
 
 function addDepartments(){
-	
+	console.log("Yo not ready yet!")
 }
+
+runInterface();
+
+
+
 
 
 

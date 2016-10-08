@@ -54,6 +54,7 @@ function buyItem(){
 							console.log(result[0].id);
 							console.log(total);
 						});
+
 	       				goAgain();
 
 	       			} else {
@@ -79,4 +80,5 @@ function goAgain(){
 			}
 		})
 }
+
 

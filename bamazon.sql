@@ -1,6 +1,6 @@
 CREATE DATABASE Bamazon;
 
-USE Bamazon;
+-- USE Bamazon;
 
 CREATE TABLE Products(
 	id INTEGER(11) AUTO_INCREMENT NOT NULL,
@@ -22,6 +22,9 @@ CREATE TABLE Departments(
 	totalSales DECIMAL(10,2) NULL,
 	primary key(id)
 );
+
+
+USE Bamazon;
 
 SELECT * FROM Departments;
 SELECT * FROM Products;
