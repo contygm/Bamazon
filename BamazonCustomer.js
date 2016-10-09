@@ -5,7 +5,7 @@
     //    }, {
     //        name: "quantity",
     //        message: "How many would you like?"
-    //    }]).then
+    //    }]).thennode 
 
 var mysql = require("mysql");
 var inquirer = require('inquirer');
@@ -83,10 +83,10 @@ function goAgain(){
 
 	prompt.get([{
        name: "again",
-       message: "Would you like to pick a another item (or try a different quantity)?",
+       message: "(y/n) Would you like to pick a another item (or try a different quantity)?",
        required: true
-   }], function(answers) {
-   		if (answers.again){
+   }], function(err, answers) {
+   		if (answers.again == 'y' || answers.again == 'Y'){
    			buyItem()
 			} else {
 				console.log("Have a great day.");
