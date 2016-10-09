@@ -1,6 +1,7 @@
 
 var mysql = require("mysql");
 var inquirer = require('inquirer');
+var prompt = require('prompt');
 
 var connection = mysql.createConnection({
 	host: "localhost",
@@ -12,17 +13,17 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
     if (err) throw err;
-
-    console.log("connection locked");
 })
 
 function pickProcess(){
-	inquirer.prompt([{
+	prompt.start();    
+
+    prompt.get([{
            name: "chosenProcess",
            type: "list",
            message: "What do you need to do?",
            choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product"]
-       }]).then(function(answers){
+       }], function(err, answers){
 			switch(answers.chosenProcess){
 				case 'View Products for Sale':
 					displayStock();

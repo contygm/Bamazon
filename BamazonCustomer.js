@@ -1,14 +1,5 @@
 
-    // inquirer.prompt([{
-    //        name: "ID",
-    //        message: "What's the product id for your item?"
-    //    }, {
-    //        name: "quantity",
-    //        message: "How many would you like?"
-    //    }]).thennode 
-
 var mysql = require("mysql");
-var inquirer = require('inquirer');
 var prompt = require('prompt');
 
 var connection = mysql.createConnection({
@@ -43,10 +34,12 @@ function buyItem(){
     prompt.get([{
        name: "ID",
        message: "What's the product id for your item?",
+       type: 'integer',
        required: true
    	}, {
        name: "quantity",
        message: "How many would you like?",
+       type: 'integer',
        required: true
    	}], function(err, answers){
        		connection.query('SELECT * FROM Products WHERE id=?', [answers.ID], function(err, res){
