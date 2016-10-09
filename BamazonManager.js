@@ -85,7 +85,6 @@ function addStock(){
            message: "How many would you like to add?"
        }]).then(function(answers){
        		var query = 'UPDATE Products SET stockQuantity = stockQuantity + ? WHERE id=?';
-       		var newQuantity = 
        		connection.query(query, [answers.quantity, answers.id],function(err, res) { 
        				goAgain()
        		});	
