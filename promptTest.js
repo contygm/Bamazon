@@ -29,7 +29,7 @@ var properties = {
     animal: {
       description: 'Enter an animal',
       default: 'dog',
-      pattern: /dog|cat/
+      pchoices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product"]
     },
     sound: {
       description: 'What sound does this animal make?',

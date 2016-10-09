@@ -1,4 +1,4 @@
-var Table = require('cli-table');
+≈
 var mysql = require("mysql");
 var inquirer = require('inquirer');
 

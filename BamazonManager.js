@@ -1,7 +1,7 @@
 
 var mysql = require("mysql");
 var inquirer = require('inquirer');
-var prompt = require('prompt');
+
 
 var connection = mysql.createConnection({
 	host: "localhost",
@@ -16,14 +16,12 @@ connection.connect(function(err) {
 })
 
 function pickProcess(){
-	prompt.start();    
-
-    prompt.get([{
+	inquirer.prompt([{
            name: "chosenProcess",
            type: "list",
            message: "What do you need to do?",
            choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product"]
-       }], function(err, answers){
+       }]).then(function(answers){
 			switch(answers.chosenProcess){
 				case 'View Products for Sale':
 					displayStock();
@@ -48,30 +46,33 @@ function pickProcess(){
 }
 
 function displayStock(){
-	connection.query('SELECT * FROM Products', function(err, res) {
-	    console.log("ID | Produce Name | Price | Stock Quantity");
-	    console.log("-----------------------------------");
-	    for (var i = 0; i < res.length; i++) {
-	        console.log(res[i].id + " | " + res[i].productName + " | " + res[i].price + " | " + res[i].stockQuantity);
-	    }
+	var table = new Table({ head: ["ID", "Product Name", "Price", "Stock Quantity"] });
 
-    	console.log("-----------------------------------");
+	connection.query('SELECT * FROM Products', function(err, res) {
+	    
+	    for (var i = 0; i < res.length; i++) {
+	        table.push( 
+	        	[res[i].id,res[i].productName, res[i].price, res[i].stockQuantity] 
+	        );
+	    }
+	    console.log(table.toString());
     	goAgain();
 	});
 
 };
 
 function lowStock(){
+	var table = new Table({ head: ["ID", "Product Name", "Price", "Stock Quantity"] });
+
 	connection.query('SELECT * FROM Products WHERE stockQuantity < 5', function(err, res) {
-		    
-			console.log("ID | Produce Name | Price | Stock Quantity");
-	    	console.log("-----------------------------------");
-		    
+		    		    
 		    for (var i = 0; i < res.length; i++) {
-		        console.log(res[i].id + " | " + res[i].productName + " | " + res[i].price + " | " + res[i].stockQuantity);
+		        table.push(
+		        	[res[i].id, res[i].productName, res[i].price, res[i].stockQuantity]
+		        );
 		    }
 
-	    	console.log("-----------------------------------");
+	    	console.log(table.toString());
 	    	goAgain();
 	});
 }

@@ -1,4 +1,4 @@
-
+var Table = require('cli-table');
 var mysql = require("mysql");
 var prompt = require('prompt');
 
@@ -17,11 +17,15 @@ connection.connect(function(err) {
 })
 
 function displayStock(){
+	var table = new Table({ head: ["ID", "Product Name", "Price"] });
+	
 	connection.query('SELECT * FROM Products', function(err, res) {
 	    for (var i = 0; i < res.length; i++) {
-	        console.log(res[i].id + " | " + res[i].productName + " | " + res[i].price);
+	        table.push(
+	        	[res[i].id, res[i].productName, res[i].price]
+	        );
 	    }
-
+	    console.log(table.toString());
     	console.log("-----------------------------------");
     	buyItem();
 	});
