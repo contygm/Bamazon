@@ -37,7 +37,7 @@ function displaySales(){
 	var table = new Table({ head: ["ID", "Department Name", "Over Head Costs", "Product Sales", "Total Profit"] });
 	connection.query('SELECT * FROM Departments', function(err, res) {
 	    for (var i = 0; i < res.length; i++) {
-		    var profit = res[i].overHeadCosts - res[i].totalSales;
+		    var profit = res[i].totalSales - res[i].overHeadCosts;
 		    table.push(
 			    [res[i].id, res[i].departmentName, res[i].overHeadCosts,res[i].totalSales, profit]
 			);

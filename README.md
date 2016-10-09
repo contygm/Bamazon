@@ -29,8 +29,13 @@ Departments Database:
 
 **After Cusomter Functions**
 
+![Before_Dep](/functionalityPics/BC_DepartmentsDB_After.png)
+![Before_Dep](/functionalityPics/BC_ProductDB_After.png)
 
 **After Manager Functions**
 
+![Before_Dep](/functionalityPics/BM_After.png)
 
 **After Executive Functions**
+
+![Before_Dep](/functionalityPics/BE_After.png)
