@@ -26,7 +26,7 @@ function displayStock(){
 	        );
 	    }
 	    console.log(table.toString());
-    	console.log("-----------------------------------");
+    	
     	buyItem();
 	});
 
@@ -67,7 +67,7 @@ function buyItem(){
        				goAgain();
 
        			} else {
-       				console.log("Sorry, we don't have enough of" + res.productName + "fill that order!")
+       				console.log("Sorry, we don't have enough " + res[0].productName + " to fill that order!")
        				goAgain();
        			}
   			})
