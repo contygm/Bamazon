@@ -45,6 +45,7 @@ Departments Database:
 * SQL
 * Node
 * Inquirer
+* Prompt
 * CLI-Table
 * CLI
 * JavaScript
