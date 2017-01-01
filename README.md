@@ -39,3 +39,12 @@ Departments Database:
 **After Executive Functions**
 
 ![Before_Dep](/functionalityPics/BE_After.png)
+
+###Technologies Used
+
+* SQL
+* Node
+* Inquirer
+* CLI-Table
+* CLI
+* JavaScript
