@@ -40,7 +40,7 @@ Departments Database:
 
 ![Before_Dep](/functionalityPics/BE_After.png)
 
-###Technologies Used
+##Technologies Used
 
 * SQL
 * Node
@@ -48,3 +48,4 @@ Departments Database:
 * CLI-Table
 * CLI
 * JavaScript
+* Github
